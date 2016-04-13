@@ -25,7 +25,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		}
 		else {
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
-
+			var insertIMG = 'imagenes/' + nameImagen;
 			console.log(directorio);
 			fs.writeFile(directorio, data, function(err){
 				if(err) {
@@ -35,7 +35,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 					console.log(data);
 					basededatos.insert({
 						'Nombre': nameImagen,
-						'Url': directorio,
+						'Url': insertIMG,
 						'Fecha': new Date()
 					}).success(function(doc){
 						res.redirect('http://somostodospanama.com/app/verfotos.html?id=' + doc._id);
