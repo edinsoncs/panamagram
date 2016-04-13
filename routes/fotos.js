@@ -3,7 +3,12 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next){
-	res.json('hola','edinson');
+	var db = req.db;
+	var collection = db.get('imagendata');
+	collection.find({}, function(err, doc){
+		var uploadIMG = doc.reverse();
+		res.json(uploadIMG);
+	});
 });
 
 router.get('/:idfoto', function(req, res, next){
