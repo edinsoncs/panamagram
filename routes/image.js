@@ -3,6 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var url = require('url');
 var multipart = require('connect-multiparty');
+var path = require('path');
 
 var multipartMiddleware = multipart();
 
@@ -23,7 +24,8 @@ router.post('/', multipartMiddleware, function(req, res, next){
 			console.log(err);
 		}
 		else {
-			var directorio = '../imagenes/' + nameImagen;
+			var directorio = path.join(__dirname, '..', 'public', 'imagenes'+ nameImagen;) 
+
 			console.log(directorio);
 			fs.writeFile(directorio, data, function(err){
 				if(err) {
