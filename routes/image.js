@@ -36,8 +36,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 						'Url': directorio,
 						'Fecha': new Date()
 					}).success(function(doc){
-						res.redirect('http://localhost:8019/verfotos.html?id=' + doc._id);
-						
+						res.redirect('http://somostodospanama.com/app/verfotos.html?id=' + doc._id);
 					}).error(function(err){
 						console.log(err);
 					});
