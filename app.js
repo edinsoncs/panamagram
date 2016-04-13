@@ -9,12 +9,12 @@ var db = monk('localhost:27017/panamagram');
 var home = require('./routes/home');
 var postimg = require('./routes/image');
 var api = require('./routes/api');
+var fotounica = require('./routes/fotos');
 
 
 app.use(function(req, res, next){
 	req.db = db;
 	console.log('conectamos a la bd');
-	
 	next();
 });
 
@@ -23,6 +23,7 @@ app.use('/', home);
 app.use('/imagen', postimg);
 
 app.use('/api', api);
+app.use('/fotos', fotounica);
 
 
 

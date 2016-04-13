@@ -36,7 +36,8 @@ router.post('/', multipartMiddleware, function(req, res, next){
 						'Url': directorio,
 						'Fecha': new Date()
 					}).success(function(doc){
-						console.log('se agrego');
+						
+						res.redirect('fotos/');
 					}).error(function(err){
 						console.log(err);
 					});
