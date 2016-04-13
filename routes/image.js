@@ -23,7 +23,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 			console.log(err);
 		}
 		else {
-			var directorio = req.url + __dirname + '/imagenes/' + nameImagen;
+			var directorio = '../imagenes/' + nameImagen;
 			console.log(directorio);
 			fs.writeFile(directorio, data, function(err){
 				if(err) {
