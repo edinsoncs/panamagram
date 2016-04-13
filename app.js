@@ -6,6 +6,8 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/panamagram');
 
+var path = require('path');
+
 var home = require('./routes/home');
 var postimg = require('./routes/image');
 var api = require('./routes/api');
@@ -27,15 +29,13 @@ app.use(function (req, res, next) {
 });
 
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', home);
 app.use('/imagen', postimg);
 
 app.use('/api', api);
 app.use('/fotos', fotounica);
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 function puerto() {
