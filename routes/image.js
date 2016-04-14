@@ -38,7 +38,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 						'Url': insertIMG,
 						'Fecha': new Date()
 					}).success(function(doc){
-						res.redirect('http://somostodospanama.com/app/verfotos.html?id=' + doc._id);
+						res.redirect('http://somostodospanama.com/app/demo2/shared.html?id=' + doc._id);
 					}).error(function(err){
 						console.log(err);
 					});
