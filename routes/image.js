@@ -27,7 +27,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		else {
 
 			easyimg.rescrop({
-			     src:nameImagen, dst: __dirname, '..', 'public', 'resizes/' + nameImagen,
+			     src:nameImagen, dst: path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen),
 			     width:500, height:500,
 			     cropwidth:128, cropheight:128,
 			     x:0, y:0
