@@ -26,19 +26,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		}
 		else {
 
-			easyimg.rescrop({
-			     src:data, dst: path.join(__dirname, '..', 'public', 'resizes/' + nameImagen),
-			     width:500, height:350,
-			     cropwidth:128, cropheight:128,
-			     x:0, y:0
-			  }).then(
-			  function(image) {
-			     console.log('Funciono ' + image.width + ' x ' + image.height);
-			  },
-			  function (err) {
-			    console.log(err);
-			  }
-			);
+			
 
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
@@ -50,7 +38,23 @@ router.post('/', multipartMiddleware, function(req, res, next){
 					console.log(err);
 				}
 				else {
-					console.log(data);
+					
+
+					easyimg.rescrop({
+					     src:data, dst: path.join(__dirname, '..', 'public', 'resizes/' + nameImagen),
+					     width:500, height:350,
+					     cropwidth:128, cropheight:128,
+					     x:0, y:0
+					  }).then(
+					  function(image) {
+					     console.log('Funciono ' + image.width + ' x ' + image.height);
+					  },
+					  function (err) {
+					    console.log(err);
+					  }
+					);
+
+
 					basededatos.insert({
 						'Nombre': nameImagen,
 						'Url': insertIMG,
