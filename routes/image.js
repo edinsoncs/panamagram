@@ -4,7 +4,7 @@ var fs = require('fs');
 var url = require('url');
 var multipart = require('connect-multiparty');
 var path = require('path');
-
+var im = require('imagemagick');
 var multipartMiddleware = multipart();
 
 
@@ -12,12 +12,19 @@ var multipartMiddleware = multipart();
 
 router.post('/', multipartMiddleware, function(req, res, next){
 	var imagen = req.files.imagen;
-	var im = require('imagemagick');
+	
 	var db = req.db;
 
 	var basededatos = db.get('imagendata');
 
-	
+	im.resize({
+		  srcPath: __dirname + '/koala.jpg',
+		  dstPath: __dirname + '/koala-small.jpg',
+		  width:   '50%'
+		}, function(err, stdout, stderr){
+		  if (err) throw err
+		  console.log('resized')
+		});
 					
 
 	fs.readFile(req.files.imagen.path, function(err, data){
@@ -29,11 +36,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		else {
 
 			
-			im.convert([req.files.imagen.path, '-resize', '400x350', req.files.imagen.name], 
-					function(err, stdout){
-					  if (err) throw err;
-					  console.log('stdout:', stdout);
-	});
+			
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
 			var insertIMG = 'imagenes/' + nameImagen;
