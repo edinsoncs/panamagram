@@ -37,23 +37,6 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 			fs.writeFile(directorio, data, function(err){
 				
-				im.resize({
-
-				srcPath: directorio,
-
-				dstPath: resizes,
-
-				width: 200
-
-				}, function(err, stdout, stderr){
-
-				if (err) throw err;
-
-				console.log('resized image to fit within 200x200px');
-
-				});
-
-
 				if(err) {
 					console.log(err);
 				}
