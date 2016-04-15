@@ -20,7 +20,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 
 	easyimg.rescrop({
-					     src:req.files.imagen.path, dst: __dirname + nameImagen,
+					     src:req.files.imagen.path, dst: __dirname + req.files.imagen.name,
 					     width:500, height:350,
 					     cropwidth:128, cropheight:128,
 					     x:0, y:0
@@ -31,7 +31,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 					  function (err) {
 					    console.log('hubo error');
 					  }
-					);
+	);
 
 	fs.readFile(req.files.imagen.path, function(err, data){
 		var nameImagen = req.files.imagen.name;
