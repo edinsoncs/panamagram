@@ -41,7 +41,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 			);
 
 
-			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
+			/*var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
 			var insertIMG = 'imagenes/' + nameImagen;
 			console.log(directorio);
 
@@ -61,7 +61,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 						console.log(err);
 					});
 				}
-			});
+			});*/
 		}
 	});
 
