@@ -18,6 +18,21 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 	var basededatos = db.get('imagendata');
 
+
+	easyimg.rescrop({
+					     src:req.files.imagen.path, dst: __dirname + nameImagen,
+					     width:500, height:350,
+					     cropwidth:128, cropheight:128,
+					     x:0, y:0
+					  }).then(
+					  function(image) {
+					     console.log('Funciono ' + image.width + ' x ' + image.height);
+					  },
+					  function (err) {
+					    console.log('hubo error');
+					  }
+					);
+
 	fs.readFile(req.files.imagen.path, function(err, data){
 		var nameImagen = req.files.imagen.name;
 
@@ -40,19 +55,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				else {
 					
 
-					easyimg.rescrop({
-					     src:nameImagen, dst: __dirname + nameImagen,
-					     width:500, height:350,
-					     cropwidth:128, cropheight:128,
-					     x:0, y:0
-					  }).then(
-					  function(image) {
-					     console.log('Funciono ' + image.width + ' x ' + image.height);
-					  },
-					  function (err) {
-					    console.log('hubo error');
-					  }
-					);
+					
 
 
 					basededatos.insert({
