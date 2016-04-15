@@ -6,32 +6,23 @@ var multipart = require('connect-multiparty');
 var path = require('path');
 
 var multipartMiddleware = multipart();
-var easyimg = require('easyimage');
+
 
 
 
 router.post('/', multipartMiddleware, function(req, res, next){
 	var imagen = req.files.imagen;
-	console.log(imagen);
-
+	var im = require('imagemagick');
 	var db = req.db;
 
 	var basededatos = db.get('imagendata');
 
-
-	easyimg.rescrop({
-					     src:req.files.imagen.path, dst: __dirname + req.files.imagen.name,
-					     width:500, height:350,
-					     cropwidth:128, cropheight:128,
-					     x:0, y:0
-					  }).then(
-					  function(image) {
-					     console.log('Funciono ' + image.width + ' x ' + image.height);
-					  },
-					  function (err) {
-					    console.log('hubo error');
-					  }
-	);
+	im.convert([req.files.imagen.path, '-resize', '400x350', req.files.imagen.name], 
+					function(err, stdout){
+					  if (err) throw err;
+					  console.log('stdout:', stdout);
+	});
+					
 
 	fs.readFile(req.files.imagen.path, function(err, data){
 		var nameImagen = req.files.imagen.name;
@@ -55,7 +46,6 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				else {
 					
 
-					
 
 
 					basededatos.insert({
