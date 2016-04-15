@@ -17,11 +17,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 	var basededatos = db.get('imagendata');
 
-	im.convert([req.files.imagen.path, '-resize', '400x350', req.files.imagen.name], 
-					function(err, stdout){
-					  if (err) throw err;
-					  console.log('stdout:', stdout);
-	});
+	
 					
 
 	fs.readFile(req.files.imagen.path, function(err, data){
@@ -33,7 +29,11 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		else {
 
 			
-
+			im.convert([req.files.imagen.path, '-resize', '400x350', req.files.imagen.name], 
+					function(err, stdout){
+					  if (err) throw err;
+					  console.log('stdout:', stdout);
+	});
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
 			var insertIMG = 'imagenes/' + nameImagen;
