@@ -9,7 +9,6 @@ var multipartMiddleware = multipart();
 
 
 
-
 router.post('/', multipartMiddleware, function(req, res, next){
 	var imagen = req.files.imagen;
 	
@@ -27,13 +26,11 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		}
 		else {
 
-			
-
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
 			var resizes = path.join(__dirname, '..', 'public', 'resizes/' + nameImagen);
 			var insertIMG = 'imagenes/' + nameImagen;
-			console.log(directorio);
+			//console.log(directorio);
 
 			fs.writeFile(directorio, data, function(err){
 				
@@ -47,7 +44,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 						'Url': insertIMG,
 						'Fecha': new Date()
 					}).success(function(doc){
-						res.redirect('http://somostodospanama.com/app/demo2/shared.html?id=' + doc._id);
+						res.redirect('http://panagram.xyz/shared.html?id=' + doc._id);
 					}).error(function(err){
 						console.log(err);
 					});
