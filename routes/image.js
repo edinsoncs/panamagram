@@ -17,14 +17,6 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 	var basededatos = db.get('imagendata');
 
-	im.resize({
-		  srcPath: __dirname + '/koala.jpg',
-		  dstPath: __dirname + '/koala-small.jpg',
-		  width:   '50%'
-		}, function(err, stdout, stderr){
-		  if (err) throw err
-		  console.log('resized')
-		});
 					
 
 	fs.readFile(req.files.imagen.path, function(err, data){
@@ -36,20 +28,36 @@ router.post('/', multipartMiddleware, function(req, res, next){
 		else {
 
 			
-			
+
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
+			var resizes = path.join(__dirname, '..', 'public', 'resizes/' + nameImagen);
 			var insertIMG = 'imagenes/' + nameImagen;
 			console.log(directorio);
 
 			fs.writeFile(directorio, data, function(err){
+				
+				im.resize({
+
+				srcPath: directorio,
+
+				dstPath: resizes,
+
+				width: 200
+
+				}, function(err, stdout, stderr){
+
+				if (err) throw err;
+
+				console.log('resized image to fit within 200x200px');
+
+				});
+
+
 				if(err) {
 					console.log(err);
 				}
 				else {
-					
-
-
 
 					basededatos.insert({
 						'Nombre': nameImagen,
