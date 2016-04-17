@@ -22,13 +22,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 	fs.readFile(req.files.imagen.path, function(err, data){
 		var nameImagen = req.files.imagen.name;
 
-		easyimg.info(nameImagen).then(
-		  function(file) {
-		    console.log('funciono: ' + file);
-		  }, function (err) {
-		    console.log('hubo un error' + err);
-		  }
-		);
+		
 
 
 		if(err){
@@ -43,6 +37,15 @@ router.post('/', multipartMiddleware, function(req, res, next){
 			//console.log(directorio);
 
 			fs.writeFile(directorio, data, function(err){
+
+				easyimg.info(nameImagen).then(
+				  function(file) {
+				    console.log('funciono: ' + file);
+				  }, function (err) {
+				    console.log('hubo un error' + err);
+				  }
+				);
+
 				
 				if(err) {
 					console.log(err);
