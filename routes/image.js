@@ -49,7 +49,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 				easyimg.rescrop({
 				     src:directorio, dst:resizes,
-				     width:500, height:500,
+				     width:400, height:400,
 				     x:0, y:0
 				  }).then(
 				  function(image) {
