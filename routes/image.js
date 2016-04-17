@@ -40,9 +40,23 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 				easyimg.info(directorio).then(
 				  function(file) {
-				    console.log('funciono: ' + file);
+				    console.log(file);
 				  }, function (err) {
 				    console.log('hubo un error' + err);
+				  }
+				);
+
+				easyimg.rescrop({
+				     src:directorio, dst:'./output/kitten-thumbnail.jpg',
+				     width:500, height:500,
+				     cropwidth:128, cropheight:128,
+				     x:0, y:0
+				  }).then(
+				  function(image) {
+				     console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
+				  },
+				  function (err) {
+				    console.log(err);
 				  }
 				);
 
