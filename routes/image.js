@@ -5,6 +5,7 @@ var url = require('url');
 var multipart = require('connect-multiparty');
 var path = require('path');
 var im = require('imagemagick');
+var easyimg = require('easyimage');
 var multipartMiddleware = multipart();
 
 
@@ -20,6 +21,15 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 	fs.readFile(req.files.imagen.path, function(err, data){
 		var nameImagen = req.files.imagen.name;
+
+		easyimg.info(nameImagen).then(
+		  function(file) {
+		    console.log('funciono: ' + file);
+		  }, function (err) {
+		    console.log('hubo un error' + err);
+		  }
+		);
+
 
 		if(err){
 			console.log(err);
