@@ -33,6 +33,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
 			var resizes = path.join(__dirname, '..', 'public', 'resizes/' + nameImagen);
+			var insertResize = 'resizes/' + nameImagen;
 			var insertIMG = 'imagenes/' + nameImagen;
 			//console.log(directorio);
 
@@ -47,7 +48,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				);
 
 				easyimg.rescrop({
-				     src:directorio, dst:'./output/kitten-thumbnail.jpg',
+				     src:directorio, dst:resizes,
 				     width:500, height:500,
 				     cropwidth:128, cropheight:128,
 				     x:0, y:0
@@ -69,6 +70,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 					basededatos.insert({
 						'Nombre': nameImagen,
 						'Url': insertIMG,
+						'Resizes': insertResize,
 						'Fecha': new Date()
 					}).success(function(doc){
 						res.redirect('http://panagram.xyz/shared.html?id=' + doc._id);
