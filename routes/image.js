@@ -33,8 +33,10 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 			var directorio = path.join(__dirname, '..', 'public', 'imagenes/' + nameImagen);
 			var resizes = path.join(__dirname, '..', 'public', 'resizes/' + nameImagen);
+			var miniatures = path.join(__dirname, '..', 'public', 'miniatures/' + nameImagen);
 			var insertResize = 'resizes/' + nameImagen;
 			var insertIMG = 'imagenes/' + nameImagen;
+			var inserMiniatures = 'miniatures/' + nameImagen;
 			//console.log(directorio);
 
 			fs.writeFile(directorio, data, function(err){
@@ -60,6 +62,19 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				  }
 				);
 
+				easyimg.rescrop({
+				     src:directorio, dst:miniatures,
+				     width:120, height:120,
+				     x:0, y:0
+				  }).then(
+				  function(image) {
+				    console.log('funciono');
+				  },
+				  function (err) {
+				    console.log(err);
+				  }
+				);  
+
 				
 				if(err) {
 					console.log(err);
@@ -70,6 +85,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 						'Nombre': nameImagen,
 						'Url': insertIMG,
 						'Resizes': insertResize,
+						'Miniatures': inserMiniatures,
 						'Fecha': new Date()
 					}).success(function(doc){
 						res.redirect('http://panagram.xyz/shared.html?id=' + doc._id);
