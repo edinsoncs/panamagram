@@ -38,7 +38,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 
 			fs.writeFile(directorio, data, function(err){
 
-				easyimg.info(nameImagen).then(
+				easyimg.info(directorio).then(
 				  function(file) {
 				    console.log('funciono: ' + file);
 				  }, function (err) {
