@@ -8,6 +8,8 @@ var im = require('imagemagick');
 var easyimg = require('easyimage');
 var multipartMiddleware = multipart();
 
+var shortid = require('shortid');
+
 
 
 router.post('/', multipartMiddleware, function(req, res, next){
@@ -20,8 +22,8 @@ router.post('/', multipartMiddleware, function(req, res, next){
 					
 
 	fs.readFile(req.files.imagen.path, function(err, data){
-		var nameImagen = req.files.imagen.name;
-
+		var nameImagen = shortid.generate() + req.files.imagen.name;
+		console.log(nameImagen)
 		
 
 
