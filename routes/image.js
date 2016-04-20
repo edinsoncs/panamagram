@@ -51,9 +51,8 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				  }
 				);
 
-				easyimg.rescrop({
+				easyimg.crop({
 				     src:directorio, dst:resizes,
-				     width:400, height:500,
 				     x:0, y:0, 
 				     quality: 100,
 				     cropwidth:300, cropheight :300,
