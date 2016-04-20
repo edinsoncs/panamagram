@@ -54,8 +54,12 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				easyimg.rescrop({
 				     src:directorio, dst:resizes,
 				     width:400, height:400,
-				     x:0, y:0
-				  }).then(
+				     x:0, y:0, 
+				     quality: 100,
+				     background: red,
+				     width:128, height:128,
+        			 gravity:'Center'
+					  }).then(
 				  function(image) {
 				     console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
 				  },
