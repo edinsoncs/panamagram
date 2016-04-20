@@ -56,7 +56,7 @@ router.post('/', multipartMiddleware, function(req, res, next){
 				     width:400, height:400,
 				     x:0, y:0, 
 				     quality: 100,
-				     cropwidth:128, cropheight :128,
+				     cropwidth:300, cropheight :250,
         			 gravity:'Center'
 					  }).then(
 				  function(image) {
